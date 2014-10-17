@@ -112,18 +112,11 @@ intensityCount=[82;91;100;97;129;137;134;112;162;157;165;156;207;172;192;184;178
 figure(7);
 plot(theta,intensityCount);
 xlabel('Zenith Angle({\theta}{\circ})');
-ylabel('Intensity');
+ylabel('Intensity {\theta}');
 title('Intensity as a function of Zenith Angle {\theta}{\circ}');
 
-% Corrected intensity count is the intensity minus the background radiation
-
-Nup = 63;
-figure(8);
-correctedIntensityCount = intensityCount-Nup;
-plot(theta,correctedIntensityCount);
-xlabel('Zenith Angle({\theta}{\circ})');
-ylabel('Corrected Intensity ');
-title('Correction Intensity as a function of Zenith Angle {\theta}{\circ}');
+% Corrected intensity count is the intensity minus the background radi
+correctedIntensityCount = intensityCount - 63;
  
 
 
