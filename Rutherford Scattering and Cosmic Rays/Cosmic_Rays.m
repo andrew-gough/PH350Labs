@@ -101,6 +101,8 @@ title('True Cosmic Ray Count as a Function of the Discriminator Setting');
 theta = -90:6:90;
 cosSquaredTheta = cos(degtorad(theta)).^2;
 
+
+%Plot of the ideal count(Cos^2) as theta varies 
 figure(6);
 plot(theta,cosSquaredTheta);
 xlabel('{\theta}{\circ}');
@@ -109,6 +111,7 @@ title('Cos^2 {\theta} as Angle {\theta} varies');
 
 intensityCount=[82;91;100;97;129;137;134;112;162;157;165;156;207;172;192;184;178;172;187;146;155;172;125;133;120;141;107;119;103;88;81];
 
+%Plot of Intensity count against the theta angle
 figure(7);
 plot(theta,intensityCount);
 xlabel('Zenith Angle({\theta}{\circ})');
@@ -118,6 +121,7 @@ title('Intensity as a function of Zenith Angle {\theta}{\circ}');
 % Corrected intensity count is the intensity minus the background radiation
 
 Nup = 63;
+
 figure(8);
 correctedIntensityCount = intensityCount-Nup;
 plot(theta,correctedIntensityCount);
@@ -125,7 +129,8 @@ xlabel('Zenith Angle({\theta}{\circ})');
 ylabel('Corrected Intensity ');
 title('Correction Intensity as a function of Zenith Angle {\theta}{\circ}');
  
-
+NEast = sum(correctedIntensityCount(1:15))
+NWest = sum(correctedIntensityCount(17:end))
 
 
 

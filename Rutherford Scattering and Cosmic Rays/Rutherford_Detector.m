@@ -38,13 +38,13 @@ for i =1:length(MeanCounts);
      [~, ~, ~, ~, ~, randMeanCountsUncertDiscrim(i)] = statistics(degreeCounts(i,:));
 end
 
-figure(1); 
+figure(2); 
 plot(degrees,MeanCounts);               
 xlabel('Degrees');
 ylabel('Radiation Counts');
 title('Radiation Counts as a Function of Degrees from the Normal');
 
-figure(2); 
+figure(3); 
 plot(-26:2:14,MeanCounts);               
 xlabel('Corrected Degree   s');
 ylabel('Radiation Counts');
@@ -53,7 +53,7 @@ title('Radiation Counts as a Function of Degrees from the Normal (Shifted by 6 d
 logNbyT =log(MeanCounts./countingTime);
 log1OverSin4 =log(1./(sind(degrees./2).^4));
 
-figure(3);
+figure(4);
 plot(logNbyT,log1OverSin4);
 xlabel('log(N/t)');
 ylabel('log[1/sin^{4}(\theta/2)]');
