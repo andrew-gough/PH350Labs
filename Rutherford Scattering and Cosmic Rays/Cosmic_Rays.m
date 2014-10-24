@@ -124,13 +124,22 @@ Nup = 63;
 
 figure(8);
 correctedIntensityCount = intensityCount-Nup;
-plot(theta,correctedIntensityCount);
+plot(theta,correctedIntensityCount,theta,cosSquaredTheta*150);
+legend('Corrected Intensity Count','cos^2({\theta} )');
 xlabel('Zenith Angle({\theta}{\circ})');
 ylabel('Corrected Intensity ');
-title('Correction Intensity as a function of Zenith Angle {\theta}{\circ}');
+title('Corrected Intensity as a function of Zenith Angle {\theta}{\circ}');
  
-NEast = sum(correctedIntensityCount(1:15))
-NWest = sum(correctedIntensityCount(17:end))
+NEast = sum(correctedIntensityCount(1:15));
+NWest = sum(correctedIntensityCount(17:end));
+e =  (NEast - NWest)/(0.5*(NWest+NEast));
+
+unCertInDiscrim3point5 = 0.95;
+dAdB = sqrt((unCertInDiscrim3point5*100/33)^2+(unCertInDiscrim3point5*100/33)^2);
+errorInE=sqrt((dAdB/(NEast-NWest))^2+(dAdB/(NEast+NWest))^2);
+strcat('final result = ' , roundN(e,3) , ' +-  ' ,roundN(errorInE*e,3));
+
+createTable(discrimUpTotalCounts,9,'Discriminator Up Counts Table');
 
 
 

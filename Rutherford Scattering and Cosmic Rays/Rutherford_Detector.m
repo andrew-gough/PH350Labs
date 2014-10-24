@@ -43,21 +43,21 @@ plot(degrees,MeanCounts);
 xlabel('Degrees');
 ylabel('Radiation Counts');
 title('Radiation Counts as a Function of Degrees from the Normal');
-
+correctedDegrees =-26:2:14;
 figure(3); 
-plot(-26:2:14,MeanCounts);               
+plot(correctedDegrees,MeanCounts);               
 xlabel('Corrected Degree   s');
 ylabel('Radiation Counts');
 title('Radiation Counts as a Function of Degrees from the Normal (Shifted by 6 degrees to account for systematic uncertainty');
 
 logNbyT =log(MeanCounts./countingTime);
-log1OverSin4 =log(1./(sind(degrees./2).^4));
+log1OverSin4 =log(1./(sind(correctedDegrees./2).^4));
 
 figure(4);
 plot(logNbyT,log1OverSin4);
 xlabel('log(N/t)');
 ylabel('log[1/sin^{4}(\theta/2)]');
-title('Radiation Counts as a Function of Degrees from the Normal');
+title('Radiation Counts as a Function of Degrees from the (With corrected Degrees)');
 
-
+% N(theta) ~ cosec^4(theta/2)
 
