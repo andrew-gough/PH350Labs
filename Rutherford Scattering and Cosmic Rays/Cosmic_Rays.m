@@ -137,8 +137,7 @@ e =  (NEast - NWest)/(0.5*(NWest+NEast));
 unCertInDiscrim3point5 = 0.95;
 dAdB = sqrt((unCertInDiscrim3point5*100/33)^2+(unCertInDiscrim3point5*100/33)^2);
 errorInE=sqrt((dAdB/(NEast-NWest))^2+(dAdB/(NEast+NWest))^2);
-strcat('final result = ' , roundN(e,3) , ' +-  ' ,roundN(errorInE*e,3));
-
+strcat('final result = ' , roundN(e,3) , ' +-  ' ,roundN(errorInE*e,3))
 createTable(discrimUpTotalCounts,9,'Discriminator Up Counts Table');
 
 
