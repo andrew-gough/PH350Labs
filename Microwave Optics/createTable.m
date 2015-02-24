@@ -3,13 +3,24 @@
 % figNo is the figure number 
 % tableTitle is the title to be displayed for the table
 
-function[] = createTable(x,figNo,tableTitle)
-% 
-% f = figure(figNo);
-% set(f,'Name',tableTitle,'NumberTitle','off') % To keep only your title.
-% % d = gallery('integerdata',100,[height width],0);
-% t = uitable(f,'Data',x,'ColumnWidth',{50});
-% ui = uicontrol('Style','text','Position',[200 200 400 150]);
+%function[] = createTable(x,figNo,tableTitle)
+%f = figure(figNo);
+%t = uitable(f,'Data',x,'ColumnWidth',{50});
+%end
 
+
+
+function[] = createTable(varargin)
+f = figure(cell2mat(varargin(nargin-1)));
+data = cell2mat(varargin(1));
+
+
+i = 2;
+while i<nargin-1 ;
+data = [data,cell2mat(varargin(i))];
+i = i+1;
+end
+
+t = uitable(f,'Data',data,'ColumnWidth',{50});
 
 end

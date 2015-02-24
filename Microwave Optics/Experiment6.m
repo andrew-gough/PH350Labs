@@ -14,7 +14,7 @@ figure(1);
 plot(angle,meterNarrowReading);
 title('Meter Reading against Goniometer Angle   ({\theta}) for Narrow Slit');
 xlabel('Goniometer Angle ({\theta})');
-ylabel('Meter Reading');
+ylabel('Meter Readings');
 
 
 
@@ -26,6 +26,8 @@ meterWideReading = [0.64,0,0,0.35,0,0,0,0.02,0,0,0,0,0,0,0,0,0,0];
 
 figure(2);
 plot(angle2,meterWideReading);
-title('Meter Reading  against Goniometer Angle ({\theta}) for wWide Slit');
+title('Meter Reading  against Goniometer Angle ({\theta}) for Wide Slit');
 xlabel('Goniometer Angle ({\theta})');
 ylabel('Meter Reading');
+
+createTable(angle2.',meterWideReading.',3,' ');

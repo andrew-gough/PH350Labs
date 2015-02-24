@@ -6,6 +6,9 @@
 %x in millimeters
 %t in micro seconds
 
+pressureInBar = 1.027; %bars
+
+
 %Cursory measurements taken to determine saturation point, delta x = 50cm
 x1 = 985;
 t1 = 5580.30;
@@ -79,7 +82,8 @@ t23 = 1659;
 x24 = 100;
 t24 = 1659;
 
-%Closer measurements near saturation points from X20 and T20 onward!
+%Saturation Point has been established as 305cm
+
 
 
 
@@ -520,7 +524,73 @@ tuncert = [tuncert1,tuncert2,tuncert3,tuncert4,tuncert5,tuncert6,tuncert7,tuncer
 temp = [temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8,temp9,temp10,temp11,temp12,temp13,temp14,temp15,temp16,temp17,temp18,temp19,temp20,temp21,temp22,temp23,temp24,temp25,temp26,temp27,temp28,temp29,temp30,temp31,temp32,temp33,temp34,temp35,temp36,temp37,temp38,temp39,temp40,temp41,temp42,temp43,temp44,temp45,temp46,temp47,temp48,temp49,temp50,temp51,temp52,temp53,temp54,temp55,temp56,temp57,temp58,temp59,temp60,temp61,temp62,temp63,temp64,temp65,temp66,temp67,temp68];
 h = [h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,h32,h33,h34,h35,h36,h37,h38,h39,h40,h41,h42,h43,h44,h45,h46,h47,h48,h49,h50,h51,h52,h53,h54,h55,h56,h57,h58,h59,h60,h61,h62,h63,h64,h65,h66,h67,h68];
 
+
+% Uncertainty arrays
+
+randUncertX = zeros(1);
+[~, ~, ~, ~, ~, randUncertX] = statistics(x(:));
+
+
+randUncertTemp = zeros(1);
+[~, ~, ~, ~, ~, randUncertTemp] = statistics(temp(:));
+
+
+randUncertHumid = zeros(1);
+[~, ~, ~, ~, ~, randUncertHumid] = statistics(h(:));
+
+
 v= (x./1000)./((t./10^6)/2); 
+
+randUncertV = zeros(1);
+stdDevV = zeros(1);
+[~, stdDevV, ~, ~, ~, randUncertV] = statistics(v(:));
+randUncertV
+stdDevV
+
+percentageUncert = tuncert./t;
+
+meanTemp = mean(temp);  %Average Temp   is 24.5588
+meanHumidity = mean(h); %Average Humid  is 64.9971
+saturatedVapour= 23.198; %Saturated Vapour Pressure at 24.6 would be between 24 and 25
+actualVapourPressure = saturatedVapour*meanHumidity/100;
+pressureInTorr = pressureInBar*750.06375541921;
+waterFracNumDensity = actualVapourPressure/pressureInTorr;
+waterWetPercentage = waterFracNumDensity;
+
+averageMoleMassForDryAir = (28.013*0.7808)+(32.000*0.2095)+(0.0093*39.948)+(0.0003*44.000);
+
+
+nitrogenDryPercentage = 0.7808;
+oxygenDryPercentage = 0.2095;
+argonDryPercentage = 0.0093;
+CO2DryPercentage = 0.0003;
+
+nitrogenGamma= 1.404;
+oxygenGamma =1.401;
+argonGamma = 1.668;
+CO2Gamma = 1.304;
+waterGamma = 1.31;
+
+nitrogenMoleMass = 28.013;
+oxygenMoleMass = 32.000;
+argonMoleMass = 39.948;
+CO2MoleMass = 44.000;
+waterMoleMass = 18.000;
+
+
+nitrogenWetPercentage = nitrogenDryPercentage*(1-waterWetPercentage);
+oxygenWetPercentage = oxygenDryPercentage*(1-waterWetPercentage);
+argonWetPercentage = argonDryPercentage*(1-waterWetPercentage);
+CO2WetPercentage = CO2DryPercentage*(1-waterWetPercentage);
+
+
+wetAirGamma     =(nitrogenWetPercentage*nitrogenGamma)+(oxygenWetPercentage*oxygenGamma)+(argonWetPercentage*argonGamma)+(CO2WetPercentage*CO2Gamma)+(waterWetPercentage*waterGamma);
+wetAirMoleMass  =(nitrogenWetPercentage*nitrogenMoleMass)+(oxygenWetPercentage*oxygenMoleMass)+(argonWetPercentage*argonMoleMass)+(CO2WetPercentage*CO2MoleMass)+(waterWetPercentage*waterMoleMass);        
+
+meanTempInKelvin = meanTemp + 273.15;
+gasConstant = 8.3145; 
+theoreticalSpeedOfSound = sqrt((wetAirGamma*gasConstant*meanTempInKelvin)/(wetAirMoleMass/1000));
+
 
 figure(2)
 plot(x./1000,t);
@@ -530,30 +600,39 @@ ylabel('Time Taken for Echo to Return (ms)') % y-axis label
 
 figure(3)
 plot(x./1000,tuncert);
-title('Distance against Uncertainty in Time');
+title('Distance against Absolute Uncertainty in Time');
 xlabel('Distance(m)') % x-axis label
-ylabel('Uncertainty in time (ms)') % y-axis label
+ylabel('Absolute Uncertainty in time (ms)') % y-axis label
 
 figure(4)
+plot(x./1000,percentageUncert);
+title('Distance against Percentage Uncertainty in Time');
+xlabel('Distance(m)') % x-axis label
+ylabel('Percentage Uncertainty in time (ms)') % y-axis label
+
+figure(5)
 plot(x./1000,temp);
 title('Distance against Temperature');
 xlabel('Distance(m)') % x-axis label
 ylabel('Temperature ({\circ} Celsuis)') % y-axis label
 
-figure(5)
+figure(6)
 plot(x./1000,h);
 title('Distance against Relative Humidity');
 xlabel('Distance(m)') % x-axis label
 ylabel('Relative Humidity (%)') % y-axis label
 
-figure(6)
+figure(7)
 plot(x./1000,v);
 title('Distance against Speed of Sound');
 xlabel('Distance(m)') % x-axis label
 ylabel('Speed of Sound (ms^{-1})') % y-axis label
 
 
+experimentalSpeedOfSound = mean(v)
+theoreticalSpeedOfSound
 
 
 
+close all;
 gradOfXandT = polyfit(x,t,1);
