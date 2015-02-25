@@ -72,23 +72,25 @@ bestFitFrequencyAir = polyval(gradientAirFrequencyAgainstPressure,100000:-10000:
 
 figure(1);
 hold on;
-scatter(100000:-10000:30000, averageFrequencyAir);
-plot(100000:-10000:30000, bestFitFrequencyAir,'b-.');
+scatter(100000:-10000:30000, averageFrequencyAir,100,'xk');
+plot(100000:-10000:30000, bestFitFrequencyAir,'b-');
 xlabel('Absolute Pressure(Pa)');
 ylabel('Resonant Frequency(Hz)');
 title('Absolute Pressure of Air against Resonant Frequency');
 hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
 gradientAirFrequencySquaredAgainstPressure = polyfit(100000:-10000:30000,averageFrequencySquaredAir,1)
 bestFitFrequencySquaredAir = polyval(gradientAirFrequencySquaredAgainstPressure,100000:-10000:30000);
 
 figure(2);
 hold on;
-scatter(100000:-10000:30000, averageFrequencySquaredAir);
-plot(100000:-10000:30000,bestFitFrequencySquaredAir,'b-.');
+scatter(100000:-10000:30000, averageFrequencySquaredAir,100,'xk');
+plot(100000:-10000:30000,bestFitFrequencySquaredAir,'b-');
 xlabel('Absolute Pressure(Pa)');
 ylabel('Resonant Frequency Squared(Hz)');
 title('Absolute Pressure of Air against Resonant Frequency Squared');
 hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
 
 gammaAir = ((gradientAirFrequencySquaredAgainstPressure(1)*2*M*pi^2*V)/A^2)
 
@@ -167,12 +169,13 @@ bestFitFrequencyHelium = polyval(gradientHeliumFrequencyAgainstPressure,150000:-
 
 figure(3);
 hold on;
-scatter(150000:-10000:10000, averageFrequencyHelium);
-plot(150000:-10000:10000,bestFitFrequencyHelium,'b-.');
+scatter(150000:-10000:10000, averageFrequencyHelium,100,'xk');
+plot(150000:-10000:10000,bestFitFrequencyHelium,'b-');
 xlabel('Absolute Pressure(Pa)');
 ylabel('Resonant Frequency(Hz)');
 title('Absolute Pressure of Helium against Resonant Frequency');
 hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
 
 
 
@@ -181,11 +184,12 @@ bestFitFrequencySquaredHelium = polyval(gradientHeliumFrequencySquaredAgainstPre
 
 figure(4);
 hold on;
-scatter(150000:-10000:10000, averageFrequencySquaredHelium);
-plot(150000:-10000:10000,bestFitFrequencySquaredHelium,'b-.');
+scatter(150000:-10000:10000, averageFrequencySquaredHelium,100,'xk');
+plot(150000:-10000:10000,bestFitFrequencySquaredHelium,'b-');
 xlabel('Absolute Pressure(Pa)');
 ylabel('Resonant Frequency Squared(Hz)');
 title('Absolute Pressure of Helium against Resonant Frequency Squared');
 hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
 gammaHelium = ((gradientHeliumFrequencySquaredAgainstPressure(1)*2*M*pi^2*V)/A^2)
 
