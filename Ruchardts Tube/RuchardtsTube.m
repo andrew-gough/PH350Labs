@@ -9,6 +9,7 @@ close all;
 %Our Values :
 %Air Gamma - 1.42
 %Helium Gamma - 1.31
+%Nitrogen Gamma - 1.50
 
 
 %Verified Values :
@@ -20,7 +21,15 @@ V = 5.22 * 10^-5 ; %Volume of Tube - Uncert is 0.02
 M = 0.6528 * 10 ^-2;%Mass of piston - Uncert is 0.0001
 A = 1.54 * 10^-4;%Cross section area A - Uncert is 0.01;
 
-%Systematic Uncert in Pressure 
+pipeDiameter = 12.78* 10^-3;
+pipeLength = 45.17* 10^-3;
+pipeVolume = pi*(pipeDiameter/2)^2 * pipeLength 
+%A = pi*(pipeDiameter/2)^2
+
+%V = V - pipeVolume
+
+%Systematic Uncert in Pr
+
 %is plus or minus 2500 Pascals
 %At Absolute Pressure 100,000 Pa
 frequencyAir1 = [22.2,22.65,22.23]; %Hz Systematic uncert = 0.01
@@ -193,3 +202,91 @@ hold off;
 legend('Resonant Frequency','Gradient of Data','Location','best');
 gammaHelium = ((gradientHeliumFrequencySquaredAgainstPressure(1)*2*M*pi^2*V)/A^2)
 
+
+
+%For Nitrogen
+%At Absolute Pressure 150,000 Pa
+frequencyNitrogen1 =   [29.20,28.46,29.33];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen1 =   mean(frequencyNitrogen1);
+
+
+%At Absolute Pressure 140,000 Pa
+frequencyNitrogen2 =   [26.88,26.46,26.98];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen2 =   mean(frequencyNitrogen2);
+
+%At Absolute Pressure 130,000 Pa
+frequencyNitrogen3 =   [25.75,26.34,25.85];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen3 =   mean(frequencyNitrogen3);
+
+%At Absolute Pressure 120,000 Pa
+frequencyNitrogen4 =   [24.74,25.12,25.05];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen4=   mean(frequencyNitrogen4);
+
+%At Absolute Pressure 110,000 Pa
+frequencyNitrogen5 =   [24.48,24.33,23.78];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen5 =   mean(frequencyNitrogen5);
+
+%At Absolute Pressure 100,000 Pa
+frequencyNitrogen6 =   [23.13,23.39,22.58];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen6 =   mean(frequencyNitrogen6);
+
+%At Absolute Pressure 90,000 Pa
+frequencyNitrogen7 =   [22.22,21.90,21.74];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen7 =   mean(frequencyNitrogen7);
+
+%At Absolute Pressure 80,000 Pa
+frequencyNitrogen8 =   [19.94,19.56,20.30];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen8 =   mean(frequencyNitrogen8);
+
+%At Absolute Pressure 70,000 Pa
+frequencyNitrogen9 =   [19.45,19.06,18.90];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen9 =   mean(frequencyNitrogen9);
+
+%At Absolute Pressure 60,000 Pa
+frequencyNitrogen10 =  [18.75,18.75,18.34];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen10 =   mean(frequencyNitrogen10);
+
+%At Absolute Pressure 50,000 Pa
+frequencyNitrogen11 =  [16.56,16.63,16.73];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen11 =   mean(frequencyNitrogen11);
+
+%At Absolute Pressure 40,000 Pa
+frequencyNitrogen12 =  [14.40,14.40,13.94];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen12 =   mean(frequencyNitrogen12);
+
+%At Absolute Pressure 30,000 Pa
+frequencyNitrogen13 =  [13.05,13.08,12.36];% Hz Systematic uncert = 0.01
+averageFrequencyNitrogen13 =   mean(frequencyNitrogen13);
+
+frequencyNitrogen =[frequencyNitrogen1,frequencyNitrogen2,frequencyNitrogen3,frequencyNitrogen4,frequencyNitrogen5,frequencyNitrogen6,frequencyNitrogen7,frequencyNitrogen8,frequencyNitrogen9,frequencyNitrogen10,frequencyNitrogen11,frequencyNitrogen12,frequencyNitrogen13];
+averageFrequencyNitrogen = [averageFrequencyNitrogen1,averageFrequencyNitrogen2,averageFrequencyNitrogen3,averageFrequencyNitrogen4,averageFrequencyNitrogen5,averageFrequencyNitrogen6,averageFrequencyNitrogen7,averageFrequencyNitrogen8,averageFrequencyNitrogen9,averageFrequencyNitrogen10,averageFrequencyNitrogen11,averageFrequencyNitrogen12,averageFrequencyNitrogen13];
+averageFrequencySquaredNitrogen = averageFrequencyNitrogen.^2;
+gradientNitrogenFrequencyAgainstPressure = polyfit(150000:-10000:30000,averageFrequencyNitrogen,1);
+
+bestFitFrequencyNitrogen = polyval(gradientNitrogenFrequencyAgainstPressure,150000:-10000:30000);
+
+figure(5);
+hold on;
+scatter(150000:-10000:30000, averageFrequencyNitrogen,100,'xk');
+plot(150000:-10000:30000,bestFitFrequencyNitrogen,'b-');
+xlabel('Absolute Pressure(Pa)');
+ylabel('Resonant Frequency(Hz)');
+title('Absolute Pressure of Nitrogen against Resonant Frequency');
+hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
+
+
+
+gradientNitrogenFrequencySquaredAgainstPressure = polyfit(150000:-10000:30000,averageFrequencySquaredNitrogen,1)
+bestFitFrequencySquaredNitrogen = polyval(gradientNitrogenFrequencySquaredAgainstPressure,150000:-10000:30000);
+
+figure(6);
+hold on;
+scatter(150000:-10000:30000, averageFrequencySquaredNitrogen,100,'xk');
+plot(150000:-10000:30000,bestFitFrequencySquaredNitrogen,'b-');
+xlabel('Absolute Pressure(Pa)');
+ylabel('Resonant Frequency Squared(Hz)');
+title('Absolute Pressure of Nitrogen against Resonant Frequency Squared');
+hold off;
+legend('Resonant Frequency','Gradient of Data','Location','best');
+gammaNitrogen = ((gradientNitrogenFrequencySquaredAgainstPressure(1)*2*M*pi^2*V)/A^2)

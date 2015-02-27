@@ -9,7 +9,7 @@ close all;
 % Table 1.1 contained within R, M,MR and MRSquared
 % Intensity Dial set to , dial at 180 degrees
 % M is recorded Data
-
+%Uncert in R = 0.5, uncert in m = 0.05
 R = 40:10:100;
 M =[1,0.8,0.54,0.32,0.26,0.26,0.12];
 MR = M.*R;
@@ -42,7 +42,8 @@ title('Induced Current as varying Distance R');
 
 % Section 8 
 % R is set to ~ 45cm
-
+%Uncert in R = 0.5, uncert in m = 0.05
+%Uncert in degrees = 1 degree
 degrees = 0:10:180;
 inducedCurrent =[0.03,0.03,0.03,0.03,0.03,0.03,0.04,0.20,0.78,1,0.48,0.08,0.04,0.04,0.03,0.03,0.03,0.03,0.03];
 figure(2);
