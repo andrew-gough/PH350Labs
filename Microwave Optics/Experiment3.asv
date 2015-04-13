@@ -25,7 +25,7 @@ meanWavelength = mean(wavelength);
 
 frequency = velocity/meanWavelength;
 
-lamdaUncert = ((1/12)^2 + (1/14)^2)^0.5
+lamdaUncert = ((1/12)^2 + (1/14)^2)^0.5;
 
 frequencyUncert = velocity/lamdaUncert;
 
