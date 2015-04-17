@@ -67,13 +67,13 @@ averageFrequencyAir8 = mean(frequencyAir8);
 
 
 
+    
 
 
 
 
 
-
-frequencyAir =[frequencyAir1,frequencyAir2,frequencyAir3,frequencyAir4,frequencyAir5,frequencyAir6,frequencyAir7,frequencyAir8];
+frequencyAir =[frequencyAir1;frequencyAir2;frequencyAir3;frequencyAir4;frequencyAir5;frequencyAir6;frequencyAir7;frequencyAir8];
 averageFrequencyAir = [averageFrequencyAir1,averageFrequencyAir2,averageFrequencyAir3,averageFrequencyAir4,averageFrequencyAir5,averageFrequencyAir6,averageFrequencyAir7,averageFrequencyAir8];
 averageFrequencySquaredAir = averageFrequencyAir.^2;
 gradientAirFrequencyAgainstPressure = polyfit(100000:-10000:30000,averageFrequencyAir,1);
@@ -169,7 +169,7 @@ averageFrequencyHelium15 =   mean(frequencyHelium15);
 
 
 
-frequencyHelium =[frequencyHelium1,frequencyHelium2,frequencyHelium3,frequencyHelium4,frequencyHelium5,frequencyHelium6,frequencyHelium7,frequencyHelium8,frequencyHelium9,frequencyHelium10,frequencyHelium11,frequencyHelium12,frequencyHelium13,frequencyHelium14,frequencyHelium15];
+frequencyHelium =[frequencyHelium1;frequencyHelium2;frequencyHelium3;frequencyHelium4;frequencyHelium5;frequencyHelium6;frequencyHelium7;frequencyHelium8;frequencyHelium9;frequencyHelium10;frequencyHelium11;frequencyHelium12;frequencyHelium13;frequencyHelium14;frequencyHelium15];
 averageFrequencyHelium = [averageFrequencyHelium1,averageFrequencyHelium2,averageFrequencyHelium3,averageFrequencyHelium4,averageFrequencyHelium5,averageFrequencyHelium6,averageFrequencyHelium7,averageFrequencyHelium8,averageFrequencyHelium9,averageFrequencyHelium10,averageFrequencyHelium11,averageFrequencyHelium12,averageFrequencyHelium13,averageFrequencyHelium14,averageFrequencyHelium15];
 averageFrequencySquaredHelium = averageFrequencyHelium.^2;
 gradientHeliumFrequencyAgainstPressure = polyfit(150000:-10000:10000,averageFrequencyHelium,1);
@@ -258,7 +258,7 @@ averageFrequencyNitrogen12 =   mean(frequencyNitrogen12);
 frequencyNitrogen13 =  [13.05,13.08,12.36];% Hz Systematic uncert = 0.01
 averageFrequencyNitrogen13 =   mean(frequencyNitrogen13);
 
-frequencyNitrogen =[frequencyNitrogen1,frequencyNitrogen2,frequencyNitrogen3,frequencyNitrogen4,frequencyNitrogen5,frequencyNitrogen6,frequencyNitrogen7,frequencyNitrogen8,frequencyNitrogen9,frequencyNitrogen10,frequencyNitrogen11,frequencyNitrogen12,frequencyNitrogen13];
+frequencyNitrogen =[frequencyNitrogen1;frequencyNitrogen2;frequencyNitrogen3;frequencyNitrogen4;frequencyNitrogen5;frequencyNitrogen6;frequencyNitrogen7;frequencyNitrogen8;frequencyNitrogen9;frequencyNitrogen10;frequencyNitrogen11;frequencyNitrogen12;frequencyNitrogen13];
 averageFrequencyNitrogen = [averageFrequencyNitrogen1,averageFrequencyNitrogen2,averageFrequencyNitrogen3,averageFrequencyNitrogen4,averageFrequencyNitrogen5,averageFrequencyNitrogen6,averageFrequencyNitrogen7,averageFrequencyNitrogen8,averageFrequencyNitrogen9,averageFrequencyNitrogen10,averageFrequencyNitrogen11,averageFrequencyNitrogen12,averageFrequencyNitrogen13];
 averageFrequencySquaredNitrogen = averageFrequencyNitrogen.^2;
 gradientNitrogenFrequencyAgainstPressure = polyfit(150000:-10000:30000,averageFrequencyNitrogen,1);
@@ -290,3 +290,6 @@ title('Absolute Pressure of Nitrogen against Resonant Frequency Squared');
 hold off;
 legend('Resonant Frequency','Gradient of Data','Location','best');
 gammaNitrogen = ((gradientNitrogenFrequencySquaredAgainstPressure(1)*2*M*pi^2*V)/A^2)
+
+
+close all;
