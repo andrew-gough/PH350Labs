@@ -18,7 +18,7 @@ close all;
 %Nitrogen Gamma -  1.401
 
 V = 5.22 * 10^-5 ; %Volume of Tube - Uncert is 0.02
-M = 0.6528 * 10 ^-2;%Mass of piston - Uncert is 0.0001
+M = 6.528 * 10 ^-3;%Mass of piston - Uncert is 0.0001
 A = 1.54 * 10^-4;%Cross section area A - Uncert is 0.01;
 
 pipeDiameter = 12.78* 10^-3;

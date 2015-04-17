@@ -20,6 +20,15 @@ discrimUpTotalCounts= [discrimup05count;discrimup1count;discrimup15count;discrim
 
 averageUpTotalCounts=mean(discrimUpTotalCounts.');
 
+input.data = [discrimUp.',discrimUpTotalCounts];
+input.tableColLabels = {'Discriminator Value', 'Count 1', 'Count 2', 'Count 3', 'Count 4', 'Count 5'};
+input.dataNanString = '-';
+input.tableColumnAlignment = 'l';
+input.dataFormat = {'%.1f',1,'%.0f',5};
+input.tableCaption = 'Discriminator Adjustment at Zenith angle 0 degrees';
+input.tableLabel = 'CosmicData1';
+latex = latexTable(input);
+
 % Uncertainty array
 randUpUncertDiscrim = zeros(length(averageUpTotalCounts),1);
 for i =1:length(discrimUpTotalCounts);
@@ -53,6 +62,15 @@ discrimdown5count =  [33,45,27,32,19];
 discrimDownTotalCounts= [discrimdown05count;discrimdown1count;discrimdown15count;discrimdown2count;discrimdown25count;discrimdown3count;discrimdown35count;discrimdown4count;discrimdown45count;discrimdown5count];
 
 averageDownTotalCounts=mean(discrimDownTotalCounts.');
+
+input.data = [discrimDown.',discrimDownTotalCounts];
+input.tableColLabels = {'Discriminator Value', 'Count 1', 'Count 2', 'Count 3', 'Count 4', 'Count 5'};
+input.dataNanString = '-';
+input.tableColumnAlignment = 'l';
+input.dataFormat = {'%.1f',1,'%.0f',5};
+input.tableCaption = 'Discriminator Adjustment at Zenith angle 180 degrees';
+input.tableLabel = 'CosmicData2';
+latex = latexTable(input);
 
 % Uncertainty array
 randDownUncertDiscrim = zeros(length(averageDownTotalCounts),1);
@@ -98,6 +116,7 @@ ylabel('True Cosmic Ray Count(Zenith Angle 0{\circ} minus Zenith Angle 180{\circ
 title('True Cosmic Ray Count as a Function of the Discriminator Setting');
 
 
+
 theta = -90:6:90;
 cosSquaredTheta = cos(degtorad(theta)).^2;
 
@@ -118,6 +137,15 @@ xlabel('Zenith Angle({\theta}{\circ})');
 ylabel('Intensity');
 title('Intensity as a function of Zenith Angle {\theta}{\circ}');
 
+input.data = [theta.',intensityCount];
+input.tableColLabels = {'Theta Degrees', 'Cosmic Ray Count'};
+input.dataNanString = '-';
+input.tableColumnAlignment = 'l';
+input.dataFormat = {'%.0f',2};
+input.tableCaption = 'Cosmic Ray Count as a function of Zenith Angle at Discrimator Value 3.5';
+input.tableLabel = 'CosmicData3';
+latex = latexTable(input);
+
 % Corrected intensity count is the intensity minus the background radiation
 
 Nup = 63;
@@ -129,7 +157,16 @@ legend('Corrected Intensity Count','cos^2({\theta} )');
 xlabel('Zenith Angle({\theta}{\circ})');
 ylabel('Corrected Intensity ');
 title('Corrected Intensity as a function of Zenith Angle {\theta}{\circ}');
- 
+
+input.data = [theta.',correctedIntensityCount];
+input.tableColLabels = {'Theta Degrees', 'Corrected Cosmic Ray Count'};
+input.dataNanString = '-';
+input.tableColumnAlignment = 'l';
+input.dataFormat = {'%.0f',2};
+input.tableCaption = 'Corrected Cosmic Ray Count as a function of Zenith Angle at Discrimator Value 3.5';
+input.tableLabel = 'CosmicData4';
+latex = latexTable(input);
+
 NEast = sum(correctedIntensityCount(1:15));
 NWest = sum(correctedIntensityCount(17:end));
 e =  (NEast - NWest)/(0.5*(NWest+NEast));
@@ -138,7 +175,6 @@ unCertInDiscrim3point5 = 0.95;
 dAdB = sqrt((unCertInDiscrim3point5*100/33)^2+(unCertInDiscrim3point5*100/33)^2);
 errorInE=sqrt((dAdB/(NEast-NWest))^2+(dAdB/(NEast+NWest))^2);
 strcat('final result = ' , roundN(e,3) , ' +-  ' ,roundN(errorInE*e,3))
-createTable(discrimUpTotalCounts,9,'Discriminator Up Counts Table');
 
 
 

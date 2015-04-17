@@ -16,8 +16,11 @@ sect1averageResult = (sect1result1+sect1result2+sect1result3)/3;
 sect1gradient = polyfit(pressure,sect1averageResult,1);
 
 %Graph
-scatter(pressure,sect1averageResult)
-
+figure(1);
+scatter(pressure,sect1averageResult,100,'x')
+xlabel('Pressure (mbar)');
+ylabel('Fringes Passed');
+title('Figure 1 : Fringes Passed with varied Pressure (P)');
 sect1u= (sect1gradient * mercuryWavelength * 1000 * labTemperature)/(pipeLength * 273)+1
 
 %%Section 2
@@ -46,6 +49,7 @@ sect3cumulativecounts = cumsum(sect3counts);
 
 sect3theta=[31.5,30.5,29.5,28.5,27.5,26.5,25.5,24.5,23.5,22.5,21.5,20.5];
 %%sect3theta=[31.5,30.5,29.5,28.5,27.5,26.5,25.5,24.5,23.5,22.5,21.5,20.5,20]
-scatter(sect3theta,sect3cumulativecounts)
+figure(2);
+scatter(sect3theta,sect3cumulativecounts,100,'x')
 
 sect3u = 1 + ((mercuryWavelength*sum(sect3counts))/pipeLength)

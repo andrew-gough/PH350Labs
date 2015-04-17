@@ -27,7 +27,7 @@ det14=[146 135 143 154 158];
 det16=[85 59 58 69 73]; 
 det18=[28 34 34 36 33];
 det20=[16 25 20 19 19];
-
+degrees = degrees.';
 degreeCounts=[detneg20;detneg18;detneg16;detneg14;detneg12;detneg10;detneg8;detneg6;detneg4;detneg2;det0;det2;det4;det6;det8;det10;det12;det14;det16;det18;det20];
 
 MeanCounts = mean(degreeCounts.').';
@@ -44,6 +44,19 @@ xlabel('Degrees');
 ylabel('Radiation Counts');
 title('Radiation Counts as a Function of Degrees from the Normal');
 correctedDegrees =-26:2:14;
+
+input.data = [degrees,degreeCounts];
+input.tableColLabels = {'Detector Angle', 'Count 1', 'Count 2', 'Count 3', 'Count 4', 'Count 5'};
+input.dataNanString = '-';
+input.tableColumnAlignment = 'l';
+input.dataFormat = {'%.0f',6};
+input.tableCaption = 'Radiation Counts over a Variation of Detector Angle';
+input.tableLabel = 'RutherfordData1';
+
+latex = latexTable(input);
+
+
+
 figure(3); 
 plot(correctedDegrees,MeanCounts);               
 xlabel('Corrected Degree   s');

@@ -91,12 +91,13 @@ t24 = 1659;
 
 x = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24];
 t = [t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19,t20,t21,t22,t23,t24];
-
+xold = x;
+told = t;
 figure(1);
 plot(x./1000,t);
 title('Cursory measurement of saturation point');
-xlabel('Distance(mm)') % x-axis label
-ylabel('Time(ms)') % y-axis label
+xlabel('Distance(m)') % x-axis label
+ylabel('Time(탎)') % y-axis label
 
 %Results
 
@@ -544,8 +545,8 @@ v= (x./1000)./((t./10^6)/2);
 randUncertV = zeros(1);
 stdDevV = zeros(1);
 [~, stdDevV, ~, ~, ~, randUncertV] = statistics(v(:));
-randUncertV
-stdDevV
+randUncertV;
+stdDevV;
 
 percentageUncert = tuncert./t;
 
@@ -595,20 +596,20 @@ theoreticalSpeedOfSound = sqrt((wetAirGamma*gasConstant*meanTempInKelvin)/(wetAi
 figure(2)
 plot(x./1000,t);
 title('Distance against Time Taken for Echo to Return');
-xlabel('Distance(mm)') % x-axis label
-ylabel('Time Taken for Echo to Return (ms)') % y-axis label
+xlabel('Distance(m)') % x-axis label
+ylabel('Time Taken for Echo to Return (탎)') % y-axis label
 
 figure(3)
 plot(x./1000,tuncert);
 title('Distance against Absolute Uncertainty in Time');
 xlabel('Distance(m)') % x-axis label
-ylabel('Absolute Uncertainty in time (ms)') % y-axis label
+ylabel('Absolute Uncertainty in time (탎)') % y-axis label
 
 figure(4)
 plot(x./1000,percentageUncert);
 title('Distance against Percentage Uncertainty in Time');
 xlabel('Distance(m)') % x-axis label
-ylabel('Percentage Uncertainty in time (ms)') % y-axis label
+ylabel('Percentage Uncertainty in time (탎)') % y-axis label
 
 figure(5)
 plot(x./1000,temp);
@@ -634,5 +635,4 @@ theoreticalSpeedOfSound
 
 
 
-close all;
 gradOfXandT = polyfit(x,t,1);
