@@ -12,8 +12,8 @@ meterNarrowReading= [1,0,0,0,0.3,0.42,0,0,0,0,0.02,0,0,0,0,0,0,0];
 
 figure(1);
 hold on;
-plot(angle,meterNarrowReading);
-errorbar(angle,meterNarrowReading,ones(1,18) * 0.05,'.k');
+scatter(angle,meterNarrowReading,75,'k','x');
+%errorbar(angle,meterNarrowReading,ones(1,18) * 0.05,'.k');
 hold off;
 title('Meter Reading against Goniometer Angle   ({\theta}) for Narrow Slit');
 xlabel('Goniometer Angle ({\theta})');
@@ -30,9 +30,9 @@ meterWideReading = [0.64,0,0,0.35,0,0,0,0.02,0,0,0,0,0,0,0,0,0,0];
 
 figure(2);
 hold on;
-plot(angle2,meterWideReading);
-%scatter(angle2,meterWideReading);
-errorbar(angle2,meterWideReading,ones(1,18) * 0.05,'.k');
+%plot(angle2,meterWideReading);
+scatter(angle2,meterWideReading,75,'k','x');
+%errorbar(angle2,meterWideReading,ones(1,18) * 0.05,'.k');
 hold off;
 title('Meter Reading  against Goniometer Angle ({\theta}) for Wide Slit');
 xlabel('Goniometer Angle ({\theta})');
